@@ -27,10 +27,19 @@ jobs:
         npm install
       working-directory: frontend-react  # Ensure the command runs in the frontend-react directory
 
-    # # Firebase authentication (using GitHub Secrets)
-    # - name: Authenticate Firebase
-    #   run: firebase login:ci --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
-    #   working-directory: frontend-react  # Ensure the command runs in the frontend-react directory
+
+    # Build the React app
+    - name: Build React app
+      run: npm run build
+      working-direactory: frontend-react
+
+
+    # Set up Google Cloud credentials
+    - name: Authenticate with Google Cloud
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-key.json
+      run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > $GOOGLE_APPLICATION_CREDENTIALS
+
 
     # Deploy to Firebase
     - name: Deploy to Firebase
