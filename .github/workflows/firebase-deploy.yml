@@ -34,5 +34,5 @@ jobs:
 
     # Deploy to Firebase
     - name: Deploy to Firebase
-      run: firebase deploy --only hosting --project ${{ secrets.FIREBASE_AUTH_TOKEN }}
+      run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
       working-directory: frontend-react  # Ensure the command runs in the frontend-react directory
